@@ -1,0 +1,29 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Install Setup Packages
+      apt: 
+        pkg:
+          - make
+          - gcc
+          - ripgrep
+          - unzip
+          - xclip
+          - curl
+          - fzf
+          - wget
+    - name: Create Neovim directory if it does not exist
+      file:
+        path: /opt/nvim-linux64
+        state: directory
+        mode: a+rX
+    - name: Download Neovim Latest and unarchive it in above directory
+      unarchive:
+        src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+        dest: /opt/nvim-linux64
+        remote_src: yes
+    - name: Create SymLink for Neovim
+      file:
+        src: /opt/nvim-linux64/bin/nvim
+        dest: /usr/local/bin/
+
