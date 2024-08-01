@@ -1,2 +1,2 @@
 # linuxsetup
-My Linux Setup
+My Linux Setup. For the essentials.
